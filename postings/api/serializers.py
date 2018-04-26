@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from postings.models import BlogPost, MacPost
+from postings.models import BlogPost, MacPost, Memnuniyet
 
 
 class BlogPostSerializer(serializers.ModelSerializer): # forms.ModelForm
@@ -72,3 +72,28 @@ class MacPostSerializer(serializers.ModelSerializer): # forms.ModelForm
             raise serializers.ValidationError("This title has already been used")
         return value
 """
+
+
+
+class MemnuniyetSerializer(serializers.ModelSerializer): # forms.ModelForm
+    url = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = Memnuniyet
+        fields = [
+            'url',
+            'id',
+            'mac_no',
+            'oy',
+            'sebep',
+            'gelen_tarih',
+            'timestamp',
+        ]
+        read_only_fields = ['id']
+
+    # converts to JSON
+    # validations for data passed
+
+    def get_url(self, obj):
+        # request
+        request = self.context.get("request")
+        return obj.get_api_url(request=request)

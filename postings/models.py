@@ -41,3 +41,21 @@ class MacPost(models.Model):
 
     def get_api_url(self, request=None):
         return api_reverse("api-postings:mac-rud", kwargs={'pk': self.pk}, request=request)
+
+
+class Memnuniyet(models.Model):
+    mac_no      = models.CharField(max_length=20)
+    oy          = models.CharField(max_length=1)
+    sebep       = models.CharField(max_length=2)
+    gelen_tarih = models.CharField(max_length=30)
+    timestamp   = models.DateTimeField()
+
+    def __str__(self):
+        return str(self.mac_no)
+
+    @property
+    def owner(self):
+        return self.mac_no
+
+    def get_api_url(self, request=None):
+        return api_reverse("api-postings:memnuniyet-rud", kwargs={'pk': self.pk}, request=request)
