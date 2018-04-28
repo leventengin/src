@@ -45,6 +45,7 @@ class MacPost(models.Model):
 
 class Memnuniyet(models.Model):
     mac_no      = models.CharField(max_length=20)
+    tipi        = models.CharField(max_length=2)
     oy          = models.CharField(max_length=1)
     sebep       = models.CharField(max_length=2)
     gelen_tarih = models.CharField(max_length=30)
