@@ -82,6 +82,7 @@ class MemnuniyetSerializer(serializers.ModelSerializer): # forms.ModelForm
         fields = [
             'url',
             'id',
+            'tipi',
             'mac_no',
             'oy',
             'sebep',
